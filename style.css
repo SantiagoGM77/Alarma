@@ -1,0 +1,795 @@
+*{
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+
+body {
+  --colorWhiteLow:#f4f4f4;
+  --colorSunday:#ff6b6b;
+  --colorMyBlue:#8687ff;
+  --colorBordeOptions:#545454c0;
+  --colorBordeSwitch:#848484;
+  --colorPlaceHolder:#929292;
+  --bgContainers:#1a1a1a;
+  --colorBorderCircleOptionsDefault:#8e8e8e;
+  --themeAplication:#000;
+  --bgCircleSwitch:var(--colorWhiteLow);
+  --bgPseudoelementNumbers:#000000d0;
+  --colorTextOfShowTimeAlarm:var(--colorWhiteLow);
+  --bgInputCustomTimeSnooze:#ffffff0f;
+  --colorTextSnoozeInAlarm:#ffffff57;
+  font-family:sans-serif;
+  font-size:1em;
+  font-weight:normal;
+  user-select:none;
+  background-color:var(--themeAplication);
+}
+
+.container-aplication {
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  margin:auto;
+  max-width:450px;
+  max-height:800px;
+  background-color:var(--themeAplication);
+  position:relative;
+  overflow:hidden;
+  --textDateOfAlarm:"Alarm Set For 6:00 On Tuesday, Dec 09";
+  --opacityTextDateOfAlarm:0;
+  --topAfterPseudoelementNumbers:40px;
+  --topBeforePseudoelementNumbers:40px
+}
+
+.container-aplication::after {
+  content:var(--textDateOfAlarm);
+  position:absolute;
+  left:50%;
+  top:90%;
+  transform:translateX(-50%);
+  border-radius:20px;
+  padding:13px;
+  background-color:#535353;
+  color:var(--colorTextOfShowTimeAlarm);
+  width:max-content;
+  font-size:0.9em;
+  transition:opacity 100ms linear;
+  opacity:var(--opacityTextDateOfAlarm);
+  pointer-events:none;
+  z-index:2;
+}
+
+.container-home {
+  height:100%;
+  overflow:auto;
+}
+
+.container-top-aplication {
+  height:40%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  position:relative;
+}
+
+.container-top-aplication .container-texts-alarm {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  width:80%;
+}
+
+.container-top-aplication .container-texts-alarm p {
+  text-align:center;
+}
+
+.container-top-aplication .container-texts-alarm .text-time-for-alarm-active {
+  font-size:1.75em;
+}
+
+.container-top-aplication .container-texts-alarm .text-date-of-alarm {
+  font-size:0.9em;
+  color:var(--colorPlaceHolder);
+}
+
+.container-top-aplication .container-buttons {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-inline:10px;
+  position:relative;
+  z-index:1;
+}
+
+.container-top-aplication .container-buttons .text-alarm {
+  font-size:1.3em;
+  font-weight:500;
+  opacity:0;
+}
+
+.container-top-aplication .container-buttons .container-buttons-mode-selection-alarms {
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-inline:10px;
+}
+
+.container-top-aplication .container-buttons .container-buttons-mode-selection-alarms .container-circle-select-all-alarm {
+  position:relative;
+}
+
+.container-top-aplication .container-buttons .container-buttons-mode-selection-alarms .container-circle-select-all-alarm p.text-select-alarm {
+  position:absolute;
+  left:30px;
+  top:50%;
+  transform:translateY(-50%);
+  font-weight:500;
+  width:max-content;
+}
+
+.container-top-aplication .container-buttons .container-buttons-mode-selection-alarms .container-circle-select-all-alarm p {
+  pointer-events:none;
+}
+
+.container-top-aplication .container-buttons .container-buttons-mode-selection-alarms .container-circle-select-all-alarm p.text-all {
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-17px;
+  font-size:0.7em;
+  font-weight:bold;
+}
+
+.container-added-alarms {
+  height:60%;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  padding-inline:10px;
+  overflow:auto;
+  padding-block:15px;
+}
+
+.container-alarm-apply .time {
+  font-weight:300;
+  font-size:2.5em;
+}
+
+.container-alarm-apply .container-name {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:absolute;
+  width:100%;
+  left:0;
+  top:0;
+  pointer-events:none;
+  padding-inline:15px;
+  padding-block:10px;
+}
+
+.container-alarm-apply .name {
+  width:180px;
+  font-weight:500;
+  font-size:0.90em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.container-alarm-apply .snooze-time {
+  font-weight:400;
+  font-size:0.80em;
+  color:var(--colorTextSnoozeInAlarm);
+}
+
+.container-added-alarms .text-show-no-alarms {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  color:var(--colorPlaceHolder);
+  font-size:1.1em;
+}
+
+.container-added-alarms .container-alarm-apply {
+  background-color:var(--bgContainers);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  height:110px;
+  border-radius:30px;
+  padding-inline:10px;
+  position:relative;
+  min-height:110px;
+  overflow:hidden;
+  transition:height 200ms linear,min-height 200ms linear,margin 200ms linear;
+}
+
+.container-alarm-apply.delete-alarm-effect {
+  height:0;
+  min-height:0;
+  opacity:0;
+  margin-bottom:-7px;
+}
+
+.container-alarm-apply .container-circle-select {
+  position:absolute;
+  left:17px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.container-added-alarms .container-alarm-apply .center-container {
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:nowrap;
+  align-items:center;
+  pointer-events:none;
+  transition:transform 100ms linear;
+}
+
+.container-added-alarms .container-alarm-apply .center-container .container-days-and-switch {
+  display:flex;
+  align-items:center;
+  flex-wrap:nowrap;
+  gap:20px;
+}
+
+.container-added-alarms .container-alarm-apply .days {
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  gap:5px;
+}
+
+.container-added-alarms .container-alarm-apply .days p {
+  position:relative;
+  font-weight:500;
+  font-size:0.9em;
+}
+
+.container-added-alarms .container-alarm-apply .days p.date {
+  font-size:0.85em;
+  font-weight:normal;
+}
+
+.container-added-alarms .container-alarm-apply .days p span {
+  position:absolute;
+  left:50%;
+  top:-3px;
+  transform:translateX(-50%);
+  width:3px;
+  height:3px;
+  visibility:hidden;
+  border-radius:50%;
+  background-color:var(--colorMyBlue);
+}
+
+.container-added-alarms .container-alarm-apply .days p.selected span{
+  visibility:visible;
+}
+
+.container-added-alarms .container-alarm-apply .days p.selected {
+  color:var(--colorMyBlue);
+}
+
+.container-alarm-apply audio {
+  position:absolute;
+  left:0;
+  top:0;
+  visibility:hidden;
+}
+
+.container-for-apply-alarm {
+  position:absolute;
+  width:100%;
+  top:100%;
+  height:100%;
+  background-color:var(--themeAplication);
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+ }
+ 
+.container-for-apply-alarm .container-numbers {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:55px;
+  position:relative;
+  height:40%;
+  overflow:hidden;
+}
+
+.container-for-apply-alarm .container-numbers > div {
+  height:270px;
+  width:70px;
+  overflow:hidden;
+}
+
+.container-for-apply-alarm .container-numbers::after,.container-for-apply-alarm .container-numbers::before {
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:90px;
+  pointer-events:none;
+  background-color:var(--bgPseudoelementNumbers);
+}
+
+.container-for-apply-alarm .container-numbers::after {
+  top:var(--topAfterPseudoelementNumbers);
+}
+
+.container-for-apply-alarm .container-numbers::before {
+  top:var(--topBeforePseudoelementNumbers)
+}
+
+.container-for-apply-alarm .container-numbers p {
+  font-size:2.9em;
+  font-weight:300;
+  pointer-events:none;
+}
+
+.container-for-apply-alarm .container-numbers > div.active p {
+  color:var(--colorMyBlue);
+}
+
+.container-for-apply-alarm .container-numbers > div div {
+  width:70px;
+  height:90px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container-for-apply-alarm .container-setting-alarm {
+  background-color:var(--bgContainers);
+  display:flex;
+  flex-direction:column;
+  border-radius:25px;
+  height:50%;
+  padding:15px;
+  justify-content:space-between;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting {
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-date-current {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-date-current .text-day-alarm {
+  font-size:0.90em;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-all-days-week {
+  display:flex;
+  justify-content:center;
+  flex-wrap:no-wrap;
+  gap:25px;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-all-days-week p {
+  font-size:0.85em;
+  pointer-events:none;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-all-days-week .sunday {
+  color:var(--colorSunday);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-all-days-week > div {
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  border:1px solid transparent;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-all-days-week > div.active {
+  border-color:var(--colorMyBlue);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-all-days-week > div.active p {
+  color:var(--colorMyBlue);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name {
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  overflow:visible;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .name-for-apply-alarm {
+  border:none;
+  border-bottom:1.5px solid #727272;
+  background-color:transparent;
+  outline:none;
+  padding-bottom:5px;
+  font-size:1em;
+  color:var(--colorWhiteLow);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .name-for-apply-alarm:focus {
+  border-color:var(--colorWhiteLow);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .name-for-apply-alarm::placeholder {
+  color:var(--colorPlaceHolder);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options {
+  display:flex;
+  flex-direction:column;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options .container-switch {
+  height:100%;
+  position:absolute;
+  right:0;
+  top:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options .container-switch .line {
+  border-left:0.8px solid var(--colorBordeOptions);
+  height:20px;
+  pointer-events:none;
+}
+
+.switch {
+  width:37px;
+  height:20px;
+  border-radius:10px;
+  border:1.5px solid var(--colorBordeSwitch);
+  position:relative;
+  pointer-events:auto;
+}
+
+.circle-switch {
+  width:22px;
+  height:22px;
+  border:1.5px solid var(--colorBordeSwitch);
+  border-radius:50%;
+  position:absolute;
+  left:-2px;
+  top:50%;
+  transform:translateY(-50%);
+  background-color:var(--bgCircleSwitch);
+  transition:left,border-color, 50ms ease-in-out;
+  pointer-events:none;
+}
+
+.switch.active {
+  background-color:var(--colorMyBlue);
+  border-color:var(--colorMyBlue);
+}
+
+.switch.active .circle-switch {
+  left:17px;
+  border-color:var(--colorMyBlue);
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options > div {
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  border-bottom:1px solid var(--colorBordeOptions);
+  padding-block:15px;
+  position:relative;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options .container-snooze {
+  border-bottom:none;
+  padding-bottom:0;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options .container-text-option {
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  pointer-events:none;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options .text-option {
+  font-size:1.1em;
+}
+
+.container-for-apply-alarm .container-setting-alarm .container-setting-sound-and-name .container-all-options .text-selection {
+  font-size:0.85em;
+  color:var(--colorMyBlue);
+}
+
+.container-for-apply-alarm .container-button-execute-action {
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  padding:10px;
+}
+
+.container-for-apply-alarm .container-button-execute-action button {
+  font-size:1.2em;
+  font-weight:500;
+}
+
+.container-main-of-option {
+  position:absolute;
+  top:100%;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:var(--themeAplication);
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  padding-top:15px;
+  z-index:1;
+}
+
+.container-main-of-option .container-top {
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  gap:10px;
+  padding-left:5px;
+}
+
+.container-main-of-option .container-top p {
+  font-size:1.2em;
+  font-weight:600;
+}
+
+.container-main-of-option .container-options {
+  background-color:var(--bgContainers);
+  border-radius:25px;
+  display:flex;
+  flex-direction:column;
+  padding-inline:20px;
+}
+
+.container-option {
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  align-items:center;
+  gap:20px;
+}
+
+.container-custom-time-snooze {
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  padding-block:15px;
+}
+
+.container-custom-time-snooze input {
+  width:40px;
+  height:40px;
+  background-color:var(--bgInputCustomTimeSnooze);
+  border:none;
+  outline:none;
+  text-align:center;
+  padding:3px;
+  border-radius:5px;
+  color:var(--colorWhiteLow);
+  font-size:1em;
+  font-weight:normal;
+}
+
+.container-custom-time-snooze input::placeholder {
+  width:100%;
+  text-align:center;
+  color:var(--colorPlaceHolder);
+}
+
+.container-option .circle {
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:1.5px solid var(--colorBorderCircleOptionsDefault);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+}
+
+.container-option .circle .fill {
+  background-color:var(--colorMyBlue);
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  transform:scale(0);
+}
+
+.container-option .circle.active {
+  border-color:var(--colorMyBlue);
+}
+
+.container-option .container-name-option {
+  flex-grow:1;
+  padding-block:15px;
+  border-bottom:1px solid var(--colorBordeOptions);
+  pointer-events:none;
+}
+
+.container-option:last-child .container-name-option {
+  border-bottom:none;
+}
+
+.container-for-apply-alarm , .container-main-of-option {
+  transition:top 300ms ease-in-out;
+}
+
+.container-actived-alarm {
+  position:absolute;
+  left:50%;
+  bottom:101%;
+  transform:translateX(-50%);
+  background-color:var(--bgContainers);
+  border-radius:15px;
+  box-shadow:0px 0px 1.5px #ffffff73;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  padding:15px;
+  transition:bottom 100ms linear;
+  z-index:2;
+}
+
+.container-actived-alarm .container-icon-paragraph {
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.container-icon-paragraph p {
+  font-size:0.8em;
+}
+
+.container-actived-alarm .hour-minute {
+  font-size:1.6em;
+  font-weight:300;
+  text-align:center;
+}
+
+.container-actived-alarm .container-buttons-action {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+}
+
+.container-buttons-action button {
+  color:var(--colorMyBlue);
+  font-weight:500;
+  font-size:1em;
+}
+
+.container-circle-select {
+  width:22px;
+  height:22px;
+  border:1px solid var(--colorBorderCircleOptionsDefault);
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  transition:opacity 200ms linear;
+}
+
+.container-circle-select img {
+  transform:scale(0);
+  transition:transform 50ms ease-in-out;
+}
+
+.container-option .circle.active .fill,.container-circle-select.active img {
+  transform:scale(1);
+}
+
+.container-buttons-turn-off-on-alarm {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  position:absolute;
+  width:100%;
+  top:100%;
+  left:0;
+  transition:top 100ms ease-in-out;
+  background-color:var(--themeAplication);
+}
+
+.container-buttons-turn-off-on-alarm button{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  width:100%;
+  flex-grow:1;
+  padding-block:4px;
+}
+
+.container-buttons-turn-off-on-alarm button p {
+  font-size:0.8em;
+}
+
+.container-icon-paragraph svg,.container-for-apply-alarm .container-setting-alarm .container-date-setting .container-date-current button svg,.container-buttons-turn-off-on-alarm button svg.icon-delete-alarm path {
+  stroke:var(--colorWhiteLow);
+}
+
+.container-top-aplication .container-buttons button svg,.container-main-of-option .container-top svg,.container-buttons-turn-off-on-alarm button svg:not(.icon-delete-alarm) {
+  fill:var(--colorWhiteLow);
+}
+
+button {
+  border:none;
+  outline:none;
+  background-color:transparent;
+}
+
+p {
+  color:var(--colorWhiteLow);
+}
+
+button {
+  color:var(--colorWhiteLow);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+img,input[type=date],svg {
+  pointer-events:none;
+}
+
+.opacity-middle {
+  opacity:0.3;
+}
+
+@media (prefers-color-scheme:light) {
+  body {
+    --themeAplication:#f8f8f8;
+    --bgContainers:#fff;
+    --colorWhiteLow:#2d2d2d;
+    --bgCircleSwitch:var(--bgContainers);
+    --bgPseudoelementNumbers:#f8f8f8e3;
+    --colorTextOfShowTimeAlarm:var(--themeAplication);
+    --bgInputCustomTimeSnooze:#00000010;
+    --colorTextSnoozeInAlarm:#00000057;
+    /*color de el texto snooze
+    agregar fondo de los botones desactivate activate delete*/
+  }
+}
