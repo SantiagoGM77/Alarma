@@ -219,13 +219,7 @@ function numberHasIntersecting (target,observer) {
 
 function theContainerWasObserved (entries,observer) {
   entries.forEach(entry=>{
-    if (entry.isIntersecting) {
-      numberHasIntersecting(entry.target,observer);
-      console.log(entry.target.parentElement.children.length)
-    }
-    else {
-      console.log(entry.target.innerText,'fuera de la vista')
-    }
+    if (entry.isIntersecting) numberHasIntersecting(entry.target,observer);
   })
 }
 
@@ -404,8 +398,6 @@ function backToHomeWithTransition () {
     
     observersNumbers.minutes.disconnect();
     observersNumbers.hours.disconnect();
-    
-    console.log(observersNumbers,"desconectamos los Observers")
     
     $CONTAINERTOOLSFORAPPLYALARM.remove()
     
@@ -852,8 +844,6 @@ function touchAlarmContainer ({currentTarget,type}) {
   propsAlarm = ALARMS.get(keyAlarm);
   
   if (type === "touchmove" || type === "mousemove") currentTarget.setAttribute("data-movetouch","true");
-  
-  console.log(type,"v2")
   
   if (type === "touchstart" || type === "mousedown") {
     currentTarget.removeAttribute("data-movetouch");
@@ -1311,8 +1301,6 @@ function clickAlarmApply ({target,currentTarget}) {
     
     turnOffOnAlarm(keyAlarm,keyOfAlarmActive,!target.classList.contains("active"))
     
-    console.log(keyAlarm)
-    
     getKeysOfAlarmsNear();
     
     return;
@@ -1761,8 +1749,6 @@ function scrollEndContainerNumbersTime ({currentTarget}) {
   let {scrollTop} = currentTarget;
   
   let {scrollendwithanimation} = currentTarget.dataset;
-  
-  console.log("scrollEnd lansado")
   
   if (!scrollendwithanimation) {
     let amountSquareMoving = Math.round(scrollTop / 90);
