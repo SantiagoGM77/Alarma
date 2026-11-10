@@ -251,7 +251,7 @@ export function crateContainerOfNewAlarm (name,hour,minute) {
       <p class="snooze-time"></p>
     </div>
     <div class="container-circle-select">
-      <img src="./iconsSVG/check-circle-svgrepo-com.svg" alt="check-circle" />
+      <img src="./iconsSvg/check-circle-svgrepo-com.svg" alt="check-circle" />
     </div>
     <div class="center-container">
       <p class="time">${hour}:${minute}</p>
@@ -291,7 +291,7 @@ export const htmlCustomMinutesSnooze = `<div class="container-custom-time-snooze
 export const htmlButtonsOfModeSelectingAlarms = `<div class="container-buttons-mode-selection-alarms">
   <div class="container-circle-select-all-alarm">
     <div class="container-circle-select" id="select-all-alarms">
-      <img src="./iconsSVG/check-circle-svgrepo-com.svg" alt="check-circle" />
+      <img src="./iconsSvg/check-circle-svgrepo-com.svg" alt="check-circle" />
     </div>
     <p class="text-all">All</p>
     <p class="text-select-alarm"></p>
